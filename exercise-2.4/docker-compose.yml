@@ -1,0 +1,15 @@
+services:
+  redis:
+    image: redis:latest
+  frontend:
+    image: frontend
+    ports:
+      - 127.0.0.1:5000:5000
+  backend:
+    image: backend
+    restart: unless-stopped
+    environment:
+      - REDIS_HOST=redis
+      - REQUEST_ORIGIN=http://127.0.0.1:5000
+    ports:
+      - 8080:8080
